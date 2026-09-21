@@ -2,151 +2,138 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-// Master 1024x1024 Monogram Emblem Matching User Reference:
-// - Deep Boca Juniors Midnight Navy Blue Canvas
-// - Elegant Metallic Golden Squircle (Rounded Square) Outer Frame
-// - Central Vertical Gold Divider Bar
-// - Serif Roman Capitals "H" and "F" in 3D Embossed Yellow-Gold
+// Master 1024x1024 Monogram Emblem Matching User Uploaded Reference:
+// - Deep Navy Textured Background (Boca Juniors Midnight Blue)
+// - Concentric Double Rounded Squircle Golden Frame with 3D Bevel Lighting
+// - Central Vertical Metallic Gold Divider Bar
+// - Serif Roman Capitals "H" and "F" in 3D Embossed Warm Gold with Realistic Cast Shadows
 const iconSvg = Buffer.from(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
   <defs>
-    <!-- Deep Boca Juniors Midnight Navy Blue Gradient -->
-    <radialGradient id="bocaNavy" cx="50%" cy="50%" r="75%">
-      <stop offset="0%" stop-color="#041a4a"/>
-      <stop offset="55%" stop-color="#021235"/>
-      <stop offset="85%" stop-color="#010a20"/>
-      <stop offset="100%" stop-color="#000717"/>
+    <!-- Deep Boca Juniors Navy Woven Canvas Background -->
+    <radialGradient id="bgNavy" cx="50%" cy="48%" r="72%">
+      <stop offset="0%" stop-color="#071d49"/>
+      <stop offset="45%" stop-color="#041437"/>
+      <stop offset="80%" stop-color="#020b20"/>
+      <stop offset="100%" stop-color="#010612"/>
     </radialGradient>
 
-    <!-- Metallic Gold Outer Frame Gradient (3D Bevel Lighting) -->
-    <linearGradient id="goldFrame" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fffde0"/>
-      <stop offset="15%" stop-color="#fef08a"/>
-      <stop offset="35%" stop-color="#facc15"/>
-      <stop offset="60%" stop-color="#eab308"/>
-      <stop offset="85%" stop-color="#ca8a04"/>
-      <stop offset="100%" stop-color="#92400e"/>
+    <!-- Metallic Brushed Gold Gradient (3D Light from Top-Left) -->
+    <linearGradient id="gold3D" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="14%" stop-color="#fef08a"/>
+      <stop offset="32%" stop-color="#facc15"/>
+      <stop offset="55%" stop-color="#eab308"/>
+      <stop offset="75%" stop-color="#ca8a04"/>
+      <stop offset="90%" stop-color="#a16207"/>
+      <stop offset="100%" stop-color="#713f12"/>
     </linearGradient>
 
-    <!-- Metallic Gold Inner Specular Gleam -->
-    <linearGradient id="goldInnerGleam" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.5"/>
-      <stop offset="70%" stop-color="#ca8a04" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#78350f" stop-opacity="0"/>
-    </linearGradient>
+    <!-- Deep 3D Drop Shadow on Blue Fabric -->
+    <filter id="castShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="12" dy="18" stdDeviation="14" flood-color="#00030c" flood-opacity="0.92"/>
+      <feDropShadow dx="4" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
 
-    <!-- Central Vertical Divider Bar Gradient -->
-    <linearGradient id="goldBar" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="12%" stop-color="#fef08a"/>
-      <stop offset="45%" stop-color="#facc15"/>
-      <stop offset="80%" stop-color="#ca8a04"/>
-      <stop offset="100%" stop-color="#78350f"/>
-    </linearGradient>
-
-    <!-- Metallic 3D Embossed Gold Letters Gradient -->
-    <linearGradient id="goldLetter" x1="20%" y1="10%" x2="80%" y2="95%">
-      <stop offset="0%" stop-color="#fffde7"/>
-      <stop offset="18%" stop-color="#fef08a"/>
-      <stop offset="42%" stop-color="#facc15"/>
-      <stop offset="72%" stop-color="#eab308"/>
-      <stop offset="90%" stop-color="#ca8a04"/>
-      <stop offset="100%" stop-color="#854d0e"/>
-    </linearGradient>
-
-    <!-- Subtle Drop Shadow for 3D Elevation -->
-    <filter id="elevate" x="-15%" y="-15%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.65"/>
+    <!-- Fine Canvas Fabric Texture Filter -->
+    <filter id="clothTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.055 0" in="noise" result="coloredNoise"/>
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="soft-light" in="composite" in2="SourceGraphic"/>
     </filter>
   </defs>
 
-  <!-- Solid Deep Midnight Navy Blue Canvas -->
-  <rect width="1024" height="1024" fill="url(#bocaNavy)"/>
+  <!-- Background Base -->
+  <rect width="1024" height="1024" fill="url(#bgNavy)"/>
 
-  <!-- Outer Rounded Square (Squircle) Gold Frame -->
+  <!-- Subtle Fabric Texture Pattern -->
+  <rect width="1024" height="1024" fill="url(#bgNavy)" filter="url(#clothTexture)"/>
+
+  <!-- Outer Rounded Squircle Frame (Double Border - Outer) -->
   <rect 
-    x="62" 
-    y="62" 
-    width="900" 
-    height="900" 
-    rx="140" 
+    x="142" 
+    y="142" 
+    width="740" 
+    height="740" 
+    rx="168" 
     fill="none" 
-    stroke="url(#goldFrame)" 
-    stroke-width="19" 
-    filter="url(#elevate)"
+    stroke="url(#gold3D)" 
+    stroke-width="20" 
+    filter="url(#castShadow)"
   />
 
-  <!-- Inner Golden Specular Bevel Line on the Squircle -->
+  <!-- Inner Rounded Squircle Frame (Double Border - Inner) -->
   <rect 
-    x="74" 
-    y="74" 
-    width="876" 
-    height="876" 
-    rx="128" 
+    x="182" 
+    y="182" 
+    width="660" 
+    height="660" 
+    rx="132" 
     fill="none" 
-    stroke="url(#goldInnerGleam)" 
-    stroke-width="3" 
+    stroke="url(#gold3D)" 
+    stroke-width="14" 
+    filter="url(#castShadow)"
   />
 
-  <!-- Central Vertical Metallic Gold Divider Bar -->
+  <!-- Center Vertical Metallic Gold Divider Bar -->
   <rect 
     x="505" 
-    y="230" 
+    y="320" 
     width="14" 
-    height="564" 
-    rx="3" 
-    fill="url(#goldBar)" 
-    filter="url(#elevate)"
+    height="384" 
+    rx="4" 
+    fill="url(#gold3D)" 
+    filter="url(#castShadow)"
   />
 
-  <!-- Roman Serif Letter 'H' on the Left -->
+  <!-- Left Capital Serif Letter 'H' -->
   <text 
-    x="328" 
-    y="654" 
-    font-family="Liberation Serif, Nimbus Roman, serif" 
-    font-size="390" 
+    x="372" 
+    y="648" 
+    font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
+    font-size="340" 
     font-weight="bold" 
     letter-spacing="-4" 
-    fill="url(#goldLetter)" 
+    fill="url(#gold3D)" 
     text-anchor="middle" 
-    filter="url(#elevate)"
+    filter="url(#castShadow)"
   >H</text>
 
-  <!-- Roman Serif Letter 'F' on the Right -->
+  <!-- Right Capital Serif Letter 'F' -->
   <text 
-    x="692" 
-    y="654" 
-    font-family="Liberation Serif, Nimbus Roman, serif" 
-    font-size="390" 
+    x="644" 
+    y="648" 
+    font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
+    font-size="340" 
     font-weight="bold" 
     letter-spacing="-4" 
-    fill="url(#goldLetter)" 
+    fill="url(#gold3D)" 
     text-anchor="middle" 
-    filter="url(#elevate)"
+    filter="url(#castShadow)"
   >F</text>
 </svg>
 `);
 
 // 1200x630 Executive Social Preview Card for WhatsApp & Social Networks
-// Features the new H | F Squircle Emblem on the Left and Executive Details on the Right
 const bannerSvg = Buffer.from(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <!-- Deep Boca Midnight Navy Background -->
-    <radialGradient id="bannerNavy" cx="35%" cy="50%" r="85%">
-      <stop offset="0%" stop-color="#041a4a"/>
-      <stop offset="50%" stop-color="#021235"/>
-      <stop offset="100%" stop-color="#000717"/>
+    <radialGradient id="bannerNavy" cx="30%" cy="50%" r="85%">
+      <stop offset="0%" stop-color="#071d49"/>
+      <stop offset="50%" stop-color="#041437"/>
+      <stop offset="100%" stop-color="#010612"/>
     </radialGradient>
 
-    <!-- Metallic Gold Gradients -->
-    <linearGradient id="bGoldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fffde0"/>
-      <stop offset="25%" stop-color="#fef08a"/>
-      <stop offset="50%" stop-color="#facc15"/>
-      <stop offset="80%" stop-color="#ca8a04"/>
-      <stop offset="100%" stop-color="#854d0e"/>
+    <!-- Metallic Brushed Gold Gradient -->
+    <linearGradient id="bGold3D" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="15%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#facc15"/>
+      <stop offset="60%" stop-color="#eab308"/>
+      <stop offset="85%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#713f12"/>
     </linearGradient>
 
     <linearGradient id="bDividerLine" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -155,87 +142,89 @@ const bannerSvg = Buffer.from(`
       <stop offset="100%" stop-color="#ffd500" stop-opacity="0"/>
     </linearGradient>
 
-    <filter id="bShadow" x="-10%" y="-10%" width="125%" height="125%">
-      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    <filter id="bShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="8" dy="12" stdDeviation="10" flood-color="#00020a" flood-opacity="0.8"/>
     </filter>
   </defs>
 
   <!-- Deep Navy Canvas -->
   <rect width="1200" height="630" fill="url(#bannerNavy)"/>
 
-  <!-- Elegant Inner Border -->
+  <!-- Elegant Inner Accent Borders -->
   <rect x="25" y="25" width="1150" height="580" rx="28" fill="none" stroke="#172554" stroke-width="1.5" opacity="0.6"/>
-  <rect x="35" y="35" width="1130" height="560" rx="22" fill="none" stroke="url(#bGoldLinear)" stroke-width="1.5" opacity="0.35"/>
+  <rect x="35" y="35" width="1130" height="560" rx="22" fill="none" stroke="url(#bGold3D)" stroke-width="1.5" opacity="0.35"/>
 
-  <!-- LEFT SIDE: Golden Squircle Emblem (H | F) scaled to 430x430 -->
-  <g transform="translate(60, 100)">
-    <!-- Squircle Frame -->
+  <!-- LEFT SIDE: Golden Double Squircle Emblem (H | F) scaled to 430x430 -->
+  <g transform="translate(65, 100)">
+    <!-- Outer Squircle Frame -->
     <rect 
       x="0" 
       y="0" 
       width="430" 
       height="430" 
-      rx="68" 
-      fill="#021235" 
-      stroke="url(#bGoldLinear)" 
-      stroke-width="9" 
+      rx="96" 
+      fill="#041437" 
+      stroke="url(#bGold3D)" 
+      stroke-width="10" 
       filter="url(#bShadow)"
     />
+
+    <!-- Inner Squircle Frame -->
     <rect 
-      x="7" 
-      y="7" 
-      width="416" 
-      height="416" 
-      rx="61" 
+      x="24" 
+      y="24" 
+      width="382" 
+      height="382" 
+      rx="76" 
       fill="none" 
-      stroke="#fffde0" 
-      stroke-width="1.5" 
-      opacity="0.4"
+      stroke="url(#bGold3D)" 
+      stroke-width="7" 
+      filter="url(#bShadow)"
     />
 
     <!-- Central Divider Bar -->
     <rect 
       x="211" 
-      y="98" 
+      y="114" 
       width="8" 
-      height="234" 
+      height="202" 
       rx="2" 
-      fill="url(#bGoldLinear)" 
+      fill="url(#bGold3D)" 
       filter="url(#bShadow)"
     />
 
     <!-- 'H' -->
     <text 
-      x="138" 
-      y="274" 
-      font-family="Liberation Serif, Nimbus Roman, serif" 
-      font-size="160" 
+      x="142" 
+      y="278" 
+      font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
+      font-size="168" 
       font-weight="bold" 
       letter-spacing="-2" 
-      fill="url(#bGoldLinear)" 
+      fill="url(#bGold3D)" 
       text-anchor="middle" 
       filter="url(#bShadow)"
     >H</text>
 
     <!-- 'F' -->
     <text 
-      x="290" 
-      y="274" 
-      font-family="Liberation Serif, Nimbus Roman, serif" 
-      font-size="160" 
+      x="284" 
+      y="278" 
+      font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
+      font-size="168" 
       font-weight="bold" 
       letter-spacing="-2" 
-      fill="url(#bGoldLinear)" 
+      fill="url(#bGold3D)" 
       text-anchor="middle" 
       filter="url(#bShadow)"
     >F</text>
   </g>
 
-  <!-- VERTICAL DIVIDER LINE -->
-  <line x1="535" y1="140" x2="535" y2="490" stroke="url(#bDividerLine)" stroke-width="2"/>
+  <!-- VERTICAL SEPARATOR LINE -->
+  <line x1="540" y1="140" x2="540" y2="490" stroke="url(#bDividerLine)" stroke-width="2"/>
 
   <!-- RIGHT SIDE: Executive Identity & Catering Details -->
-  <g transform="translate(585, 0)">
+  <g transform="translate(595, 0)">
     <!-- Subtitle / Tag -->
     <text 
       x="0" 
@@ -290,7 +279,7 @@ const publicDir = path.resolve('public');
 
 async function run() {
   // 1. WhatsApp Dedicated Square Monogram (600x600 in JPG & PNG)
-  await sharp(iconSvg).resize(600, 600).jpeg({ quality: 94 }).toFile(path.join(publicDir, 'og-monogram-blue.jpg'));
+  await sharp(iconSvg).resize(600, 600).jpeg({ quality: 95 }).toFile(path.join(publicDir, 'og-monogram-blue.jpg'));
   await sharp(iconSvg).resize(600, 600).png().toFile(path.join(publicDir, 'og-monogram-blue.png'));
 
   // 2. High-Res Social Preview Cards (1200x630)
@@ -312,7 +301,7 @@ async function run() {
   fs.writeFileSync(path.join(publicDir, 'favicon.svg'), iconSvg);
   fs.writeFileSync(path.join(publicDir, 'icon.svg'), iconSvg);
 
-  console.log('Successfully generated all icons matching the reference image: H | F in Squircle with Boca Navy & Gold!');
+  console.log('Successfully generated all icons matching the user uploaded reference: H | F in Double Squircle with 3D Gold!');
 }
 
 run();
