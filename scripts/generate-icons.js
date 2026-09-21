@@ -89,10 +89,10 @@ const iconSvg = Buffer.from(`
 
   <!-- Left Capital Serif Letter 'H' -->
   <text 
-    x="372" 
-    y="648" 
+    x="338" 
+    y="644" 
     font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-    font-size="340" 
+    font-size="315" 
     font-weight="bold" 
     letter-spacing="-4" 
     fill="url(#gold3D)" 
@@ -102,10 +102,10 @@ const iconSvg = Buffer.from(`
 
   <!-- Right Capital Serif Letter 'F' -->
   <text 
-    x="644" 
-    y="648" 
+    x="658" 
+    y="644" 
     font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-    font-size="340" 
+    font-size="315" 
     font-weight="bold" 
     letter-spacing="-4" 
     fill="url(#gold3D)" 
@@ -196,9 +196,9 @@ const bannerSvg = Buffer.from(`
     <!-- 'H' -->
     <text 
       x="142" 
-      y="278" 
+      y="276" 
       font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-      font-size="168" 
+      font-size="155" 
       font-weight="bold" 
       letter-spacing="-2" 
       fill="url(#bGold3D)" 
@@ -208,10 +208,10 @@ const bannerSvg = Buffer.from(`
 
     <!-- 'F' -->
     <text 
-      x="284" 
-      y="278" 
+      x="276" 
+      y="276" 
       font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-      font-size="168" 
+      font-size="155" 
       font-weight="bold" 
       letter-spacing="-2" 
       fill="url(#bGold3D)" 
@@ -279,6 +279,8 @@ const publicDir = path.resolve('public');
 
 async function run() {
   // 1. WhatsApp Dedicated Square Monogram (600x600 in JPG & PNG)
+  await sharp(iconSvg).resize(600, 600).jpeg({ quality: 95 }).toFile(path.join(publicDir, 'og-hf-boca.jpg'));
+  await sharp(iconSvg).resize(600, 600).png().toFile(path.join(publicDir, 'og-hf-boca.png'));
   await sharp(iconSvg).resize(600, 600).jpeg({ quality: 95 }).toFile(path.join(publicDir, 'og-monogram-blue.jpg'));
   await sharp(iconSvg).resize(600, 600).png().toFile(path.join(publicDir, 'og-monogram-blue.png'));
 
