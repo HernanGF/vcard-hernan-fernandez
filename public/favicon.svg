@@ -1,44 +1,55 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
   <defs>
-    <!-- Deep Navy / Royal Sapphire Blue Radial Gradient -->
-    <radialGradient id="bg" cx="50%" cy="50%" r="72%">
-      <stop offset="0%" stop-color="#1e3a8a"/>
-      <stop offset="45%" stop-color="#172554"/>
-      <stop offset="80%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#080e1a"/>
+    <!-- True Royal Blue Background Gradient -->
+    <radialGradient id="canvasBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="60%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
     </radialGradient>
     
-    <!-- Radiant Yellow-Gold Metallic Gradient -->
-    <linearGradient id="gold" x1="15%" y1="10%" x2="85%" y2="90%">
-      <stop offset="0%" stop-color="#fffbeb"/>
-      <stop offset="25%" stop-color="#fef08a"/>
-      <stop offset="55%" stop-color="#f59e0b"/>
-      <stop offset="85%" stop-color="#d97706"/>
-      <stop offset="100%" stop-color="#b45309"/>
+    <radialGradient id="discBg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="50%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+
+    <!-- Bright Yellow-Gold Metallic Gradient -->
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="18%" stop-color="#fef08a"/>
+      <stop offset="55%" stop-color="#facc15"/>
+      <stop offset="85%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+
+    <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef9c3"/>
+      <stop offset="45%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
     </linearGradient>
   </defs>
+
+  <!-- Solid rich royal blue background for entire square -->
+  <rect width="600" height="600" fill="url(#canvasBg)"/>
+
+  <!-- Outer Circular Disc with deep royal blue fill and golden border -->
+  <circle cx="300" cy="300" r="236" fill="url(#discBg)" stroke="url(#ringGold)" stroke-width="7" />
+  <circle cx="300" cy="300" r="214" fill="none" stroke="url(#ringGold)" stroke-width="3" stroke-dasharray="8 8" opacity="0.95"/>
   
-  <!-- Solid deep blue background -->
-  <rect width="512" height="512" fill="url(#bg)"/>
-  
-  <!-- Luxury Circular Accent Rings (within 80% safe zone) -->
-  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.6"/>
-  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="6 6" opacity="0.9"/>
-  
-  <!-- Central Monogram HF with serif luxury contrast in golden-yellow -->
+  <!-- Central Monogram HF with serif luxury contrast in bright yellow-gold -->
   <text 
-    x="256" 
-    y="308" 
-    fill="url(#gold)" 
+    x="300" 
+    y="360" 
+    fill="url(#goldLinear)" 
     font-family="Georgia, 'Times New Roman', serif" 
-    font-size="160" 
+    font-size="185" 
     font-weight="bold" 
     letter-spacing="6" 
     text-anchor="middle"
   >HF</text>
 
   <!-- Culinary Stars / Gastronomic Accents in bright yellow-gold -->
-  <circle cx="256" cy="125" r="5.5" fill="#facc15" opacity="0.95"/>
-  <circle cx="256" cy="385" r="5.5" fill="#facc15" opacity="0.95"/>
+  <circle cx="300" cy="148" r="7" fill="#facc15"/>
+  <circle cx="300" cy="452" r="7" fill="#facc15"/>
 </svg>
