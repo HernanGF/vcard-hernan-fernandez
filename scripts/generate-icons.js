@@ -78,7 +78,7 @@ const iconSvg = Buffer.from(`
 
   <!-- Center Vertical Metallic Gold Divider Bar -->
   <rect 
-    x="505" 
+    x="537" 
     y="320" 
     width="14" 
     height="384" 
@@ -89,7 +89,7 @@ const iconSvg = Buffer.from(`
 
   <!-- Left Capital Serif Letter 'H' -->
   <text 
-    x="338" 
+    x="371" 
     y="644" 
     font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
     font-size="315" 
@@ -102,7 +102,7 @@ const iconSvg = Buffer.from(`
 
   <!-- Right Capital Serif Letter 'F' -->
   <text 
-    x="658" 
+    x="690" 
     y="644" 
     font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
     font-size="315" 
@@ -184,7 +184,7 @@ const bannerSvg = Buffer.from(`
 
     <!-- Central Divider Bar -->
     <rect 
-      x="211" 
+      x="226" 
       y="114" 
       width="8" 
       height="202" 
@@ -195,10 +195,10 @@ const bannerSvg = Buffer.from(`
 
     <!-- 'H' -->
     <text 
-      x="142" 
+      x="146" 
       y="276" 
       font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-      font-size="155" 
+      font-size="150" 
       font-weight="bold" 
       letter-spacing="-2" 
       fill="url(#bGold3D)" 
@@ -208,10 +208,10 @@ const bannerSvg = Buffer.from(`
 
     <!-- 'F' -->
     <text 
-      x="276" 
+      x="302" 
       y="276" 
       font-family="Liberation Serif, Nimbus Roman, C059, Georgia, serif" 
-      font-size="155" 
+      font-size="150" 
       font-weight="bold" 
       letter-spacing="-2" 
       fill="url(#bGold3D)" 
