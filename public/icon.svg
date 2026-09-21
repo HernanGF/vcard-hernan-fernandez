@@ -1,37 +1,38 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
       <stop offset="0%" stop-color="#1c1917"/>
-      <stop offset="100%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
     </radialGradient>
-    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="gold" x1="10%" y1="10%" x2="90%" y2="90%">
       <stop offset="0%" stop-color="#fef3c7"/>
-      <stop offset="50%" stop-color="#f59e0b"/>
-      <stop offset="100%" stop-color="#b45309"/>
+      <stop offset="35%" stop-color="#f59e0b"/>
+      <stop offset="70%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
     </linearGradient>
   </defs>
   
-  <!-- Outer Dark Slate & Obsidian Background -->
-  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+  <!-- Solid full bleed background to prevent white borders on Android/iOS -->
+  <rect width="512" height="512" fill="url(#bg)"/>
   
-  <!-- Subtle circular border frame -->
-  <circle cx="256" cy="256" r="215" fill="none" stroke="url(#gold)" stroke-width="6" opacity="0.4"/>
-  <circle cx="256" cy="256" r="195" fill="none" stroke="url(#gold)" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.8"/>
+  <!-- Luxury Circular Accent Rings (within 80% safe zone) -->
+  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.45"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="6 6" opacity="0.85"/>
   
-  <!-- Monogram Initials HF -->
+  <!-- Central Monogram HF with serif luxury contrast -->
   <text 
     x="256" 
-    y="312" 
+    y="308" 
     fill="url(#gold)" 
     font-family="Georgia, 'Times New Roman', serif" 
-    font-size="185" 
+    font-size="160" 
     font-weight="bold" 
-    letter-spacing="10" 
+    letter-spacing="6" 
     text-anchor="middle"
   >HF</text>
 
-  <!-- Small Gastronomic Star Accent -->
-  <circle cx="256" cy="115" r="5" fill="#f59e0b" opacity="0.9"/>
-  <circle cx="256" cy="395" r="5" fill="#f59e0b" opacity="0.9"/>
+  <!-- Culinary Stars / Gastronomic Accents -->
+  <circle cx="256" cy="125" r="5" fill="#f59e0b" opacity="0.9"/>
+  <circle cx="256" cy="385" r="5" fill="#f59e0b" opacity="0.9"/>
 </svg>

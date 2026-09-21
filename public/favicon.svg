@@ -1,5 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <circle cx="32" cy="32" r="30" fill="#0c0a09" stroke="#d97706" stroke-width="2.5" />
-  <circle cx="32" cy="32" r="26" fill="none" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="3 2" />
-  <text x="32" y="38" fill="#fbbf24" font-family="'Cormorant Garamond', Georgia, serif" font-size="22" font-weight="bold" text-anchor="middle" letter-spacing="1">HF</text>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="10%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="35%" stop-color="#f59e0b"/>
+      <stop offset="70%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Solid full bleed background to prevent white borders on Android/iOS -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  
+  <!-- Luxury Circular Accent Rings (within 80% safe zone) -->
+  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.45"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="6 6" opacity="0.85"/>
+  
+  <!-- Central Monogram HF with serif luxury contrast -->
+  <text 
+    x="256" 
+    y="308" 
+    fill="url(#gold)" 
+    font-family="Georgia, 'Times New Roman', serif" 
+    font-size="160" 
+    font-weight="bold" 
+    letter-spacing="6" 
+    text-anchor="middle"
+  >HF</text>
+
+  <!-- Culinary Stars / Gastronomic Accents -->
+  <circle cx="256" cy="125" r="5" fill="#f59e0b" opacity="0.9"/>
+  <circle cx="256" cy="385" r="5" fill="#f59e0b" opacity="0.9"/>
 </svg>
