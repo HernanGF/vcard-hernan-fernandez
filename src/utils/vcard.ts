@@ -133,11 +133,15 @@ export function getCleanAppUrl(customUrl?: string): string {
   }
 }
 
+export const CARD_PREVIEW_VERSION = 'v=hf';
+
 export function buildPublicWebProfileUrl(_profile?: ChefProfile, customBase?: string): string {
   try {
-    return getCleanAppUrl(customBase);
+    const base = getCleanAppUrl(customBase);
+    const separator = base.includes('?') ? '&' : '/?';
+    return `${base}${separator}${CARD_PREVIEW_VERSION}`;
   } catch {
-    return customBase || VERCEL_PRODUCTION_URL;
+    return `${customBase || VERCEL_PRODUCTION_URL}/?${CARD_PREVIEW_VERSION}`;
   }
 }
 
