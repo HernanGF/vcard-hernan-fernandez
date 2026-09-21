@@ -1,0 +1,6 @@
+{
+  "name": "V-Card Hernán Fernández",
+  "description": "V-Card y Tarjeta Digital de Hernán Fernández, Chef Ejecutivo & Asesor Gastronómico — Guateque Manduca.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
