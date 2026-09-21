@@ -56,6 +56,9 @@ async function run() {
   // Favicon PNG fallbacks
   await sharp(svgBuffer).resize(32, 32).png().toFile(path.join(publicDir, 'favicon-32.png'));
   await sharp(svgBuffer).resize(48, 48).png().toFile(path.join(publicDir, 'favicon.ico'));
+
+  // Social Open Graph Compact Thumbnail (for WhatsApp compact side-by-side card)
+  await sharp(svgBuffer).resize(400, 400).png().toFile(path.join(publicDir, 'og-thumb.png'));
   
   // Vector SVG
   fs.writeFileSync(path.join(publicDir, 'favicon.svg'), svgBuffer);
