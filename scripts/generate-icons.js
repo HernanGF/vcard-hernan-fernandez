@@ -2,134 +2,240 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-// 600x600 Icon with Authentic Boca Juniors Dark Navy Blue Background & Vibrant Yellow-Gold Letters
+// Master 1024x1024 Monogram Emblem Matching User Reference:
+// - Deep Boca Juniors Midnight Navy Blue Canvas
+// - Elegant Metallic Golden Squircle (Rounded Square) Outer Frame
+// - Central Vertical Gold Divider Bar
+// - Serif Roman Capitals "H" and "F" in 3D Embossed Yellow-Gold
 const iconSvg = Buffer.from(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
   <defs>
-    <!-- Boca Juniors Deep Dark Navy Blue Gradient (#0a2458 -> #041738 -> #020d22) -->
-    <radialGradient id="bocaNavyBg" cx="50%" cy="50%" r="72%">
-      <stop offset="0%" stop-color="#0c2963"/>
-      <stop offset="50%" stop-color="#071b42"/>
-      <stop offset="85%" stop-color="#030e24"/>
-      <stop offset="100%" stop-color="#020817"/>
-    </radialGradient>
-    
-    <radialGradient id="bocaDiscBg" cx="50%" cy="50%" r="68%">
-      <stop offset="0%" stop-color="#0e3175"/>
-      <stop offset="45%" stop-color="#081e4a"/>
-      <stop offset="85%" stop-color="#04122d"/>
-      <stop offset="100%" stop-color="#020a1c"/>
+    <!-- Deep Boca Juniors Midnight Navy Blue Gradient -->
+    <radialGradient id="bocaNavy" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#041a4a"/>
+      <stop offset="55%" stop-color="#021235"/>
+      <stop offset="85%" stop-color="#010a20"/>
+      <stop offset="100%" stop-color="#000717"/>
     </radialGradient>
 
-    <!-- Boca Juniors Bright Yellow-Gold Gradient (El Oro Xeneize) -->
-    <linearGradient id="bocaGold" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fff885"/>
-      <stop offset="20%" stop-color="#ffd500"/>
-      <stop offset="60%" stop-color="#ffbe00"/>
-      <stop offset="90%" stop-color="#f59e0b"/>
-      <stop offset="100%" stop-color="#d97706"/>
+    <!-- Metallic Gold Outer Frame Gradient (3D Bevel Lighting) -->
+    <linearGradient id="goldFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffde0"/>
+      <stop offset="15%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#facc15"/>
+      <stop offset="60%" stop-color="#eab308"/>
+      <stop offset="85%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#92400e"/>
     </linearGradient>
 
-    <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff59d"/>
-      <stop offset="45%" stop-color="#ffd500"/>
-      <stop offset="100%" stop-color="#eab308"/>
+    <!-- Metallic Gold Inner Specular Gleam -->
+    <linearGradient id="goldInnerGleam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#ca8a04" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0"/>
     </linearGradient>
+
+    <!-- Central Vertical Divider Bar Gradient -->
+    <linearGradient id="goldBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="12%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#facc15"/>
+      <stop offset="80%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Metallic 3D Embossed Gold Letters Gradient -->
+    <linearGradient id="goldLetter" x1="20%" y1="10%" x2="80%" y2="95%">
+      <stop offset="0%" stop-color="#fffde7"/>
+      <stop offset="18%" stop-color="#fef08a"/>
+      <stop offset="42%" stop-color="#facc15"/>
+      <stop offset="72%" stop-color="#eab308"/>
+      <stop offset="90%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow for 3D Elevation -->
+    <filter id="elevate" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
   </defs>
 
-  <!-- Solid Boca Juniors Dark Navy Blue canvas -->
-  <rect width="600" height="600" fill="url(#bocaNavyBg)"/>
+  <!-- Solid Deep Midnight Navy Blue Canvas -->
+  <rect width="1024" height="1024" fill="url(#bocaNavy)"/>
 
-  <!-- Outer Circular Disc with deep dark navy blue fill and pure yellow-gold border -->
-  <circle cx="300" cy="300" r="236" fill="url(#bocaDiscBg)" stroke="url(#ringGold)" stroke-width="8" />
-  <circle cx="300" cy="300" r="214" fill="none" stroke="url(#ringGold)" stroke-width="3" stroke-dasharray="8 8" opacity="0.95"/>
-  
-  <!-- Central Monogram HF with serif luxury typography in pure Boca yellow-gold -->
+  <!-- Outer Rounded Square (Squircle) Gold Frame -->
+  <rect 
+    x="62" 
+    y="62" 
+    width="900" 
+    height="900" 
+    rx="140" 
+    fill="none" 
+    stroke="url(#goldFrame)" 
+    stroke-width="19" 
+    filter="url(#elevate)"
+  />
+
+  <!-- Inner Golden Specular Bevel Line on the Squircle -->
+  <rect 
+    x="74" 
+    y="74" 
+    width="876" 
+    height="876" 
+    rx="128" 
+    fill="none" 
+    stroke="url(#goldInnerGleam)" 
+    stroke-width="3" 
+  />
+
+  <!-- Central Vertical Metallic Gold Divider Bar -->
+  <rect 
+    x="505" 
+    y="230" 
+    width="14" 
+    height="564" 
+    rx="3" 
+    fill="url(#goldBar)" 
+    filter="url(#elevate)"
+  />
+
+  <!-- Roman Serif Letter 'H' on the Left -->
   <text 
-    x="300" 
-    y="360" 
-    fill="url(#bocaGold)" 
-    font-family="Georgia, 'Times New Roman', serif" 
-    font-size="185" 
+    x="328" 
+    y="654" 
+    font-family="Liberation Serif, Nimbus Roman, serif" 
+    font-size="390" 
     font-weight="bold" 
-    letter-spacing="6" 
-    text-anchor="middle"
-  >HF</text>
+    letter-spacing="-4" 
+    fill="url(#goldLetter)" 
+    text-anchor="middle" 
+    filter="url(#elevate)"
+  >H</text>
 
-  <!-- Boca Gold Stars / Culinary Accents in bright yellow-gold -->
-  <circle cx="300" cy="148" r="7.5" fill="#ffd500"/>
-  <circle cx="300" cy="452" r="7.5" fill="#ffd500"/>
+  <!-- Roman Serif Letter 'F' on the Right -->
+  <text 
+    x="692" 
+    y="654" 
+    font-family="Liberation Serif, Nimbus Roman, serif" 
+    font-size="390" 
+    font-weight="bold" 
+    letter-spacing="-4" 
+    fill="url(#goldLetter)" 
+    text-anchor="middle" 
+    filter="url(#elevate)"
+  >F</text>
 </svg>
 `);
 
-// 1200x630 Executive Horizontal Business Card for WhatsApp & Social Media
-// Deep Boca Dark Navy Blue with Boca Gold Accents
+// 1200x630 Executive Social Preview Card for WhatsApp & Social Networks
+// Features the new H | F Squircle Emblem on the Left and Executive Details on the Right
 const bannerSvg = Buffer.from(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <!-- Deep Boca Navy Canvas -->
-    <radialGradient id="bannerBg" cx="30%" cy="50%" r="85%">
-      <stop offset="0%" stop-color="#0a2458"/>
-      <stop offset="50%" stop-color="#051433"/>
-      <stop offset="100%" stop-color="#020817"/>
-    </radialGradient>
-    
-    <radialGradient id="sealBg" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" stop-color="#0e3175"/>
-      <stop offset="50%" stop-color="#081e4a"/>
-      <stop offset="100%" stop-color="#020a1c"/>
+    <!-- Deep Boca Midnight Navy Background -->
+    <radialGradient id="bannerNavy" cx="35%" cy="50%" r="85%">
+      <stop offset="0%" stop-color="#041a4a"/>
+      <stop offset="50%" stop-color="#021235"/>
+      <stop offset="100%" stop-color="#000717"/>
     </radialGradient>
 
-    <!-- Boca Gold Gradient -->
-    <linearGradient id="goldLinearBanner" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff885"/>
-      <stop offset="25%" stop-color="#ffd500"/>
-      <stop offset="60%" stop-color="#ffbe00"/>
-      <stop offset="85%" stop-color="#f59e0b"/>
-      <stop offset="100%" stop-color="#d97706"/>
+    <!-- Metallic Gold Gradients -->
+    <linearGradient id="bGoldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffde0"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#facc15"/>
+      <stop offset="80%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
     </linearGradient>
-    
-    <linearGradient id="goldLine" x1="0%" y1="0%" x2="0%" y2="100%">
+
+    <linearGradient id="bDividerLine" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffd500" stop-opacity="0"/>
       <stop offset="50%" stop-color="#ffd500" stop-opacity="0.85"/>
       <stop offset="100%" stop-color="#ffd500" stop-opacity="0"/>
     </linearGradient>
+
+    <filter id="bShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
   </defs>
 
-  <!-- Deep Boca Navy Canvas -->
-  <rect width="1200" height="630" fill="url(#bannerBg)"/>
+  <!-- Deep Navy Canvas -->
+  <rect width="1200" height="630" fill="url(#bannerNavy)"/>
 
-  <!-- Elegant Inner Border Frame with Golden Accents -->
+  <!-- Elegant Inner Border -->
   <rect x="25" y="25" width="1150" height="580" rx="28" fill="none" stroke="#172554" stroke-width="1.5" opacity="0.6"/>
-  <rect x="35" y="35" width="1130" height="560" rx="22" fill="none" stroke="url(#goldLinearBanner)" stroke-width="1.5" opacity="0.45"/>
+  <rect x="35" y="35" width="1130" height="560" rx="22" fill="none" stroke="url(#bGoldLinear)" stroke-width="1.5" opacity="0.35"/>
 
-  <!-- LEFT SIDE: Golden Monogram Seal (HF) in Dark Boca Navy & Gold -->
-  <g transform="translate(40, 0)">
-    <circle cx="240" cy="315" r="160" fill="url(#sealBg)" stroke="url(#goldLinearBanner)" stroke-width="6.5"/>
-    <circle cx="240" cy="315" r="142" fill="none" stroke="url(#goldLinearBanner)" stroke-width="2.5" stroke-dasharray="7 7" opacity="0.95"/>
-    
-    <!-- Monogram initials in bright Boca gold -->
+  <!-- LEFT SIDE: Golden Squircle Emblem (H | F) scaled to 430x430 -->
+  <g transform="translate(60, 100)">
+    <!-- Squircle Frame -->
+    <rect 
+      x="0" 
+      y="0" 
+      width="430" 
+      height="430" 
+      rx="68" 
+      fill="#021235" 
+      stroke="url(#bGoldLinear)" 
+      stroke-width="9" 
+      filter="url(#bShadow)"
+    />
+    <rect 
+      x="7" 
+      y="7" 
+      width="416" 
+      height="416" 
+      rx="61" 
+      fill="none" 
+      stroke="#fffde0" 
+      stroke-width="1.5" 
+      opacity="0.4"
+    />
+
+    <!-- Central Divider Bar -->
+    <rect 
+      x="211" 
+      y="98" 
+      width="8" 
+      height="234" 
+      rx="2" 
+      fill="url(#bGoldLinear)" 
+      filter="url(#bShadow)"
+    />
+
+    <!-- 'H' -->
     <text 
-      x="240" 
-      y="360" 
-      fill="url(#goldLinearBanner)" 
-      font-family="Georgia, 'Times New Roman', serif" 
-      font-size="135" 
+      x="138" 
+      y="274" 
+      font-family="Liberation Serif, Nimbus Roman, serif" 
+      font-size="160" 
       font-weight="bold" 
-      letter-spacing="5" 
-      text-anchor="middle"
-    >HF</text>
+      letter-spacing="-2" 
+      fill="url(#bGoldLinear)" 
+      text-anchor="middle" 
+      filter="url(#bShadow)"
+    >H</text>
 
-    <!-- Boca gold stars -->
-    <circle cx="240" cy="200" r="6" fill="#ffd500"/>
-    <circle cx="240" cy="430" r="6" fill="#ffd500"/>
+    <!-- 'F' -->
+    <text 
+      x="290" 
+      y="274" 
+      font-family="Liberation Serif, Nimbus Roman, serif" 
+      font-size="160" 
+      font-weight="bold" 
+      letter-spacing="-2" 
+      fill="url(#bGoldLinear)" 
+      text-anchor="middle" 
+      filter="url(#bShadow)"
+    >F</text>
   </g>
 
   <!-- VERTICAL DIVIDER LINE -->
-  <line x1="475" y1="160" x2="475" y2="470" stroke="url(#goldLine)" stroke-width="2"/>
+  <line x1="535" y1="140" x2="535" y2="490" stroke="url(#bDividerLine)" stroke-width="2"/>
 
-  <!-- RIGHT SIDE: Aligned Executive Information -->
-  <g transform="translate(530, 0)">
+  <!-- RIGHT SIDE: Executive Identity & Catering Details -->
+  <g transform="translate(585, 0)">
     <!-- Subtitle / Tag -->
     <text 
       x="0" 
@@ -142,7 +248,7 @@ const bannerSvg = Buffer.from(`
       text-transform="uppercase"
     >GUATEQUE MANDUCA</text>
 
-    <!-- Main Full Name -->
+    <!-- Main Name -->
     <text 
       x="0" 
       y="285" 
@@ -163,18 +269,18 @@ const bannerSvg = Buffer.from(`
       font-weight="500"
     >Chef Ejecutivo &amp; Asesor Gastronómico</text>
 
-    <!-- Interactive Pill / Badge in Boca Blue & Gold -->
+    <!-- Interactive Pill / Badge -->
     <g transform="translate(0, 400)">
-      <rect width="450" height="46" rx="23" fill="#0c2963" stroke="#ffd500" stroke-width="1.2"/>
-      <circle cx="26" cy="23" r="6" fill="#ffd500"/>
+      <rect width="470" height="48" rx="24" fill="#041a4a" stroke="#ffd500" stroke-width="1.2"/>
+      <circle cx="28" cy="24" r="6" fill="#ffd500"/>
       <text 
-        x="45" 
-        y="30" 
+        x="48" 
+        y="31" 
         fill="#ffffff" 
         font-family="system-ui, -apple-system, sans-serif" 
         font-size="19" 
         font-weight="600"
-      >V-Card • Menú &amp; Viandas al vacío</text>
+      >V-Card • Menú Digital &amp; Viandas al vacío</text>
     </g>
   </g>
 </svg>
@@ -183,31 +289,30 @@ const bannerSvg = Buffer.from(`
 const publicDir = path.resolve('public');
 
 async function run() {
-  // PWA & Android Icons (Boca Juniors Dark Navy Blue background + Yellow-gold letters)
+  // 1. WhatsApp Dedicated Square Monogram (600x600 in JPG & PNG)
+  await sharp(iconSvg).resize(600, 600).jpeg({ quality: 94 }).toFile(path.join(publicDir, 'og-monogram-blue.jpg'));
+  await sharp(iconSvg).resize(600, 600).png().toFile(path.join(publicDir, 'og-monogram-blue.png'));
+
+  // 2. High-Res Social Preview Cards (1200x630)
+  await sharp(bannerSvg).resize(1200, 630).jpeg({ quality: 92 }).toFile(path.join(publicDir, 'og-card.jpg'));
+  await sharp(bannerSvg).resize(1200, 630).png({ quality: 95 }).toFile(path.join(publicDir, 'og-card.png'));
+
+  // 3. PWA & Mobile App Icons
   await sharp(iconSvg).resize(512, 512).png().toFile(path.join(publicDir, 'icon-512.png'));
   await sharp(iconSvg).resize(192, 192).png().toFile(path.join(publicDir, 'icon-192.png'));
-  
-  // Apple iOS Touch Icon
   await sharp(iconSvg).resize(180, 180).png().toFile(path.join(publicDir, 'apple-touch-icon.png'));
-  
-  // Favicons
+
+  // 4. Compact Favicons & Thumbnails
+  await sharp(iconSvg).resize(400, 400).png().toFile(path.join(publicDir, 'og-thumb.png'));
+  await sharp(iconSvg).resize(200, 200).png().toFile(path.join(publicDir, 'og-thumb-small.png'));
   await sharp(iconSvg).resize(32, 32).png().toFile(path.join(publicDir, 'favicon-32.png'));
   await sharp(iconSvg).resize(48, 48).png().toFile(path.join(publicDir, 'favicon.ico'));
 
-  // Dedicated Square Monogram in Boca Navy Blue & Yellow-Gold (for WhatsApp square preview)
-  await sharp(iconSvg).resize(600, 600).png().toFile(path.join(publicDir, 'og-monogram-blue.png'));
-  await sharp(iconSvg).resize(400, 400).png().toFile(path.join(publicDir, 'og-thumb.png'));
-  await sharp(iconSvg).resize(200, 200).png().toFile(path.join(publicDir, 'og-thumb-small.png'));
-
-  // 1200x630 Executive Rectangular Card for WhatsApp & Social Networks
-  await sharp(bannerSvg).resize(1200, 630).png({ quality: 95 }).toFile(path.join(publicDir, 'og-card.png'));
-  await sharp(bannerSvg).resize(1200, 630).jpeg({ quality: 90 }).toFile(path.join(publicDir, 'og-card.jpg'));
-
-  // Vector SVG
+  // 5. Vector Files
   fs.writeFileSync(path.join(publicDir, 'favicon.svg'), iconSvg);
   fs.writeFileSync(path.join(publicDir, 'icon.svg'), iconSvg);
-  
-  console.log('All icons and banners successfully regenerated in Authentic Boca Juniors Dark Navy Blue & Gold!');
+
+  console.log('Successfully generated all icons matching the reference image: H | F in Squircle with Boca Navy & Gold!');
 }
 
 run();

@@ -1,57 +1,119 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
   <defs>
-    <!-- Boca Juniors Deep Dark Navy Blue Gradient (#0a2458 -> #041738 -> #020d22) -->
-    <radialGradient id="bocaNavyBg" cx="50%" cy="50%" r="72%">
-      <stop offset="0%" stop-color="#0c2963"/>
-      <stop offset="50%" stop-color="#071b42"/>
-      <stop offset="85%" stop-color="#030e24"/>
-      <stop offset="100%" stop-color="#020817"/>
-    </radialGradient>
-    
-    <radialGradient id="bocaDiscBg" cx="50%" cy="50%" r="68%">
-      <stop offset="0%" stop-color="#0e3175"/>
-      <stop offset="45%" stop-color="#081e4a"/>
-      <stop offset="85%" stop-color="#04122d"/>
-      <stop offset="100%" stop-color="#020a1c"/>
+    <!-- Deep Boca Juniors Midnight Navy Blue Gradient -->
+    <radialGradient id="bocaNavy" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#041a4a"/>
+      <stop offset="55%" stop-color="#021235"/>
+      <stop offset="85%" stop-color="#010a20"/>
+      <stop offset="100%" stop-color="#000717"/>
     </radialGradient>
 
-    <!-- Boca Juniors Bright Yellow-Gold Gradient (El Oro Xeneize) -->
-    <linearGradient id="bocaGold" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fff885"/>
-      <stop offset="20%" stop-color="#ffd500"/>
-      <stop offset="60%" stop-color="#ffbe00"/>
-      <stop offset="90%" stop-color="#f59e0b"/>
-      <stop offset="100%" stop-color="#d97706"/>
+    <!-- Metallic Gold Outer Frame Gradient (3D Bevel Lighting) -->
+    <linearGradient id="goldFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffde0"/>
+      <stop offset="15%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#facc15"/>
+      <stop offset="60%" stop-color="#eab308"/>
+      <stop offset="85%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#92400e"/>
     </linearGradient>
 
-    <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff59d"/>
-      <stop offset="45%" stop-color="#ffd500"/>
-      <stop offset="100%" stop-color="#eab308"/>
+    <!-- Metallic Gold Inner Specular Gleam -->
+    <linearGradient id="goldInnerGleam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#ca8a04" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0"/>
     </linearGradient>
+
+    <!-- Central Vertical Divider Bar Gradient -->
+    <linearGradient id="goldBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="12%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#facc15"/>
+      <stop offset="80%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Metallic 3D Embossed Gold Letters Gradient -->
+    <linearGradient id="goldLetter" x1="20%" y1="10%" x2="80%" y2="95%">
+      <stop offset="0%" stop-color="#fffde7"/>
+      <stop offset="18%" stop-color="#fef08a"/>
+      <stop offset="42%" stop-color="#facc15"/>
+      <stop offset="72%" stop-color="#eab308"/>
+      <stop offset="90%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow for 3D Elevation -->
+    <filter id="elevate" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
   </defs>
 
-  <!-- Solid Boca Juniors Dark Navy Blue canvas -->
-  <rect width="600" height="600" fill="url(#bocaNavyBg)"/>
+  <!-- Solid Deep Midnight Navy Blue Canvas -->
+  <rect width="1024" height="1024" fill="url(#bocaNavy)"/>
 
-  <!-- Outer Circular Disc with deep dark navy blue fill and pure yellow-gold border -->
-  <circle cx="300" cy="300" r="236" fill="url(#bocaDiscBg)" stroke="url(#ringGold)" stroke-width="8" />
-  <circle cx="300" cy="300" r="214" fill="none" stroke="url(#ringGold)" stroke-width="3" stroke-dasharray="8 8" opacity="0.95"/>
-  
-  <!-- Central Monogram HF with serif luxury typography in pure Boca yellow-gold -->
+  <!-- Outer Rounded Square (Squircle) Gold Frame -->
+  <rect 
+    x="62" 
+    y="62" 
+    width="900" 
+    height="900" 
+    rx="140" 
+    fill="none" 
+    stroke="url(#goldFrame)" 
+    stroke-width="19" 
+    filter="url(#elevate)"
+  />
+
+  <!-- Inner Golden Specular Bevel Line on the Squircle -->
+  <rect 
+    x="74" 
+    y="74" 
+    width="876" 
+    height="876" 
+    rx="128" 
+    fill="none" 
+    stroke="url(#goldInnerGleam)" 
+    stroke-width="3" 
+  />
+
+  <!-- Central Vertical Metallic Gold Divider Bar -->
+  <rect 
+    x="505" 
+    y="230" 
+    width="14" 
+    height="564" 
+    rx="3" 
+    fill="url(#goldBar)" 
+    filter="url(#elevate)"
+  />
+
+  <!-- Roman Serif Letter 'H' on the Left -->
   <text 
-    x="300" 
-    y="360" 
-    fill="url(#bocaGold)" 
-    font-family="Georgia, 'Times New Roman', serif" 
-    font-size="185" 
+    x="328" 
+    y="654" 
+    font-family="Liberation Serif, Nimbus Roman, serif" 
+    font-size="390" 
     font-weight="bold" 
-    letter-spacing="6" 
-    text-anchor="middle"
-  >HF</text>
+    letter-spacing="-4" 
+    fill="url(#goldLetter)" 
+    text-anchor="middle" 
+    filter="url(#elevate)"
+  >H</text>
 
-  <!-- Boca Gold Stars / Culinary Accents in bright yellow-gold -->
-  <circle cx="300" cy="148" r="7.5" fill="#ffd500"/>
-  <circle cx="300" cy="452" r="7.5" fill="#ffd500"/>
+  <!-- Roman Serif Letter 'F' on the Right -->
+  <text 
+    x="692" 
+    y="654" 
+    font-family="Liberation Serif, Nimbus Roman, serif" 
+    font-size="390" 
+    font-weight="bold" 
+    letter-spacing="-4" 
+    fill="url(#goldLetter)" 
+    text-anchor="middle" 
+    filter="url(#elevate)"
+  >F</text>
 </svg>
