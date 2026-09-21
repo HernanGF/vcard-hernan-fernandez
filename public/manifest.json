@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "V-Card Hernán Fernández",
+  "short_name": "V-Card Hernán",
+  "description": "Tarjeta de contacto digital V-Card de Hernán Fernández, Chef Ejecutivo & Asesor Gastronómico.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/assets/hernan-profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

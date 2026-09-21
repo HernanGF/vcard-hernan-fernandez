@@ -20,7 +20,9 @@ import {
   Link as LinkIcon,
   Globe,
   Contact,
-  Info
+  Info,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { SafeQrCode } from './components/SafeQrCode';
@@ -141,6 +143,58 @@ export default function App() {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(searchParams.get('edit') === '1' || searchParams.get('admin') === '1');
   const [isExplanationOpen, setIsExplanationOpen] = useState<boolean>(false);
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(!!(document.fullscreenElement || (document as any).webkitFullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', onFullscreenChange);
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          await elem.requestFullscreen();
+        } else if ((elem as any).webkitRequestFullscreen) {
+          await (elem as any).webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        }
+      }
+    } catch (e) {
+      console.warn('Fullscreen request error:', e);
+    }
+  };
+
+  const handleInstallApp = async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === 'accepted') {
+      setInstallPrompt(null);
+    }
+  };
 
   // Sync to localStorage
   useEffect(() => {
@@ -306,6 +360,39 @@ export default function App() {
         {/* Header Profile Section */}
         <div className="relative bg-gradient-to-b from-amber-950/40 via-neutral-900/80 to-stone-950 p-6 sm:p-8 text-center border-b border-amber-900/20">
           
+          {/* Top Quick Actions Bar (Fullscreen, Install, Share) */}
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-20">
+            {installPrompt && (
+              <button
+                id="btn-install-pwa"
+                onClick={handleInstallApp}
+                className="px-2.5 py-1.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                title="Instalar App en pantalla de inicio"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Instalar</span>
+              </button>
+            )}
+            <button
+              id="btn-toggle-fullscreen"
+              onClick={toggleFullscreen}
+              className="p-2 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-amber-400 border border-stone-800/80 backdrop-blur-sm transition-all cursor-pointer shadow-sm"
+              title={isFullscreen ? 'Salir de pantalla completa' : 'Ver en pantalla completa'}
+              aria-label="Pantalla completa"
+            >
+              {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            </button>
+            <button
+              id="btn-quick-share-header"
+              onClick={() => setIsQrModalOpen(true)}
+              className="p-2 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-amber-400 border border-stone-800/80 backdrop-blur-sm transition-all cursor-pointer shadow-sm"
+              title="Compartir tarjeta"
+              aria-label="Compartir tarjeta"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+          </div>
+
           {/* Profile Avatar / Photo */}
           <div className="relative inline-flex flex-col items-center justify-center mb-3.5">
             <img
