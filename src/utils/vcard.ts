@@ -106,6 +106,7 @@ Al abrir este enlace podrás:
 ${targetUrl}`;
 }
 
+export const VERCEL_PRODUCTION_URL = 'https://vcard-hernan-fernandez.vercel.app';
 export const AI_STUDIO_SHARED_URL = 'https://ais-pre-eder53zmzkew6zfqfcngez-33636785901.us-east1.run.app';
 
 export function getCleanAppUrl(customUrl?: string): string {
@@ -115,17 +116,18 @@ export function getCleanAppUrl(customUrl?: string): string {
       return cleanCustom.endsWith('/') ? cleanCustom.slice(0, -1) : cleanCustom;
     }
 
-    const origin = window.location.origin;
-    // If inside Google AI Studio private dev environment, use the public preview domain (ais-pre-)
-    if (origin.includes('ais-dev-')) {
-      return origin.replace('ais-dev-', 'ais-pre-');
+    if (typeof window !== 'undefined') {
+      const origin = window.location.origin;
+      // If opened on Vercel or a custom domain, use that exact origin
+      if (origin.includes('vercel.app')) {
+        return origin;
+      }
     }
-    const pathname = window.location.pathname;
-    const full = `${origin}${pathname}`;
-    const clean = full.split('?')[0].split('#')[0];
-    return clean.endsWith('/') ? clean.slice(0, -1) : clean;
+
+    // Default to the official public Vercel production URL
+    return VERCEL_PRODUCTION_URL;
   } catch {
-    return AI_STUDIO_SHARED_URL;
+    return VERCEL_PRODUCTION_URL;
   }
 }
 
@@ -133,7 +135,7 @@ export function buildPublicWebProfileUrl(_profile?: ChefProfile, customBase?: st
   try {
     return getCleanAppUrl(customBase);
   } catch {
-    return customBase || AI_STUDIO_SHARED_URL;
+    return customBase || VERCEL_PRODUCTION_URL;
   }
 }
 
