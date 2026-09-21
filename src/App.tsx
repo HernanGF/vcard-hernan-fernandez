@@ -22,7 +22,8 @@ import {
   Contact,
   Info,
   Maximize2,
-  Minimize2
+  Minimize2,
+  BookOpen
 } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { SafeQrCode } from './components/SafeQrCode';
@@ -91,6 +92,12 @@ export default function App() {
     if (!base.linkedinUrl || !base.linkedinUrl.trim()) {
       base.linkedinUrl = 'https://www.linkedin.com/in/hernan-fernandez';
       base.linkedinText = 'in/hernan-fernandez';
+    }
+
+    // Ensure menuUrl is set to the official Guateque Manduca web app
+    if (!base.menuUrl || base.menuUrl.includes('instagram.com') || base.menuUrl.trim() === '') {
+      base.menuUrl = 'https://guateque-manduca-app.vercel.app';
+      base.menuTitle = 'Menú digital - Catering y Viandas al vacío';
     }
 
     const fromUrl = parseProfileFromUrl();
@@ -513,6 +520,33 @@ export default function App() {
                   </div>
                   <div className="text-base sm:text-lg font-bold text-stone-100 mt-0.5">
                     {igWateke.handle || '@guatequemanduca'}
+                  </div>
+                </div>
+              </div>
+              <ExternalLink className="w-5 h-5 text-amber-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+            </a>
+
+            {/* Menú Digital: Catering y Viandas al vacío (Guateque Manduca) */}
+            <a
+              id="link-menu-digital-action"
+              href={profile.menuUrl || (igWateke.url || 'https://instagram.com/guatequemanduca')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 sm:p-4.5 rounded-2xl bg-gradient-to-r from-amber-950/40 via-neutral-900/90 to-neutral-900/90 hover:from-amber-950/60 hover:to-amber-900/20 border border-amber-500/40 hover:border-amber-400 text-stone-100 transition-all shadow-md group cursor-pointer"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/25 text-amber-300 flex items-center justify-center border border-amber-500/40 group-hover:scale-105 transition-transform shrink-0 shadow-sm">
+                  <BookOpen className="w-6 h-6 text-amber-400" />
+                </div>
+                <div className="text-left">
+                  <div className="text-sm sm:text-base font-bold text-amber-300 flex items-center gap-1.5">
+                    <span>{profile.menuTitle || 'Menú digital - Catering y Viandas al vacío'}</span>
+                    <span className="px-1.5 py-0.5 text-[10px] bg-amber-500/20 text-amber-300 rounded font-bold uppercase tracking-wider">
+                      Carta
+                    </span>
+                  </div>
+                  <div className="text-xs sm:text-sm text-stone-300 mt-0.5 font-medium">
+                    Guateque Manduca • Ver carta y pedidos
                   </div>
                 </div>
               </div>

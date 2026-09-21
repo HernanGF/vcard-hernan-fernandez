@@ -65,7 +65,8 @@ export function generateVCard(profile: ChefProfile): string {
     li.url ? `URL;type=LinkedIn:${li.url}` : '',
     igChef.url ? `URL;type=Instagram-Chef:${igChef.url}` : '',
     igWateke.url ? `URL;type=Instagram-Guateque:${igWateke.url}` : '',
-    `NOTE:${profile.role} • ${profile.company}. WhatsApp: ${cleanPhone}. Instagram Chef: ${igChef.handle}. Instagram Guateque: ${igWateke.handle}. LinkedIn: ${li.display}`,
+    profile.menuUrl ? `URL;type=Menu-Viandas:${profile.menuUrl}` : '',
+    `NOTE:${profile.role} • ${profile.company}. WhatsApp: ${cleanPhone}. Instagram Chef: ${igChef.handle}. Instagram Guateque: ${igWateke.handle}. LinkedIn: ${li.display}${profile.menuUrl ? `. Menú y Viandas: ${profile.menuUrl}` : ''}`,
     'END:VCARD',
   ].filter(Boolean);
 
@@ -83,6 +84,7 @@ export function generateTextSummary(profile: ChefProfile): string {
     profile.phone ? `📱 WhatsApp: ${profile.phone}` : '',
     igChef.url ? `📸 Instagram Chef: ${igChef.url}` : '',
     igWateke.url ? `🍽️ Instagram Guateque Manduca: ${igWateke.url}` : '',
+    profile.menuUrl ? `🍱 Menú & Viandas: ${profile.menuUrl}` : '',
     li.url ? `💼 LinkedIn: ${li.url}` : '',
   ].filter(Boolean).join('\n');
 }

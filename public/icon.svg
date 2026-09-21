@@ -1,26 +1,32 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
-      <stop offset="0%" stop-color="#1c1917"/>
-      <stop offset="100%" stop-color="#0a0a0a"/>
+    <!-- Deep Navy / Royal Sapphire Blue Radial Gradient -->
+    <radialGradient id="bg" cx="50%" cy="50%" r="72%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="45%" stop-color="#172554"/>
+      <stop offset="80%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#080e1a"/>
     </radialGradient>
-    <linearGradient id="gold" x1="10%" y1="10%" x2="90%" y2="90%">
-      <stop offset="0%" stop-color="#fef3c7"/>
-      <stop offset="35%" stop-color="#f59e0b"/>
-      <stop offset="70%" stop-color="#d97706"/>
-      <stop offset="100%" stop-color="#92400e"/>
+    
+    <!-- Radiant Yellow-Gold Metallic Gradient -->
+    <linearGradient id="gold" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="55%" stop-color="#f59e0b"/>
+      <stop offset="85%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
     </linearGradient>
   </defs>
   
-  <!-- Solid full bleed background to prevent white borders on Android/iOS -->
+  <!-- Solid deep blue background -->
   <rect width="512" height="512" fill="url(#bg)"/>
   
   <!-- Luxury Circular Accent Rings (within 80% safe zone) -->
-  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.45"/>
-  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="6 6" opacity="0.85"/>
+  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.6"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="6 6" opacity="0.9"/>
   
-  <!-- Central Monogram HF with serif luxury contrast -->
+  <!-- Central Monogram HF with serif luxury contrast in golden-yellow -->
   <text 
     x="256" 
     y="308" 
@@ -32,7 +38,7 @@
     text-anchor="middle"
   >HF</text>
 
-  <!-- Culinary Stars / Gastronomic Accents -->
-  <circle cx="256" cy="125" r="5" fill="#f59e0b" opacity="0.9"/>
-  <circle cx="256" cy="385" r="5" fill="#f59e0b" opacity="0.9"/>
+  <!-- Culinary Stars / Gastronomic Accents in bright yellow-gold -->
+  <circle cx="256" cy="125" r="5.5" fill="#facc15" opacity="0.95"/>
+  <circle cx="256" cy="385" r="5.5" fill="#facc15" opacity="0.95"/>
 </svg>

@@ -12,6 +12,8 @@ export const DEFAULT_CHEF_PROFILE: ChefProfile = {
   email: "hernan.chef.ej@gmail.com",
   instagramChef: "@hernan.chef.ej",
   instagramWateke: "@guatequemanduca",
+  menuUrl: "https://guateque-manduca-app.vercel.app",
+  menuTitle: "Menú digital - Catering y Viandas al vacío",
   linkedinUrl: "https://www.linkedin.com/in/hernan-fernandez-chef-ej",
   linkedinText: "in/hernan-fernandez-chef-ej",
   location: "Buenos Aires, Argentina",

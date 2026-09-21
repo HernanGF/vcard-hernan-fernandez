@@ -10,6 +10,8 @@ export interface ChefProfile {
   email: string;
   instagramChef: string;
   instagramWateke: string;
+  menuUrl?: string;
+  menuTitle?: string;
   linkedinUrl: string;
   linkedinText: string;
   location: string;

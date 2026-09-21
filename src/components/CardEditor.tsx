@@ -19,7 +19,8 @@ import {
   Image as ImageIcon,
   ExternalLink,
   Save,
-  CheckCircle2
+  CheckCircle2,
+  BookOpen
 } from 'lucide-react';
 import { ChefProfile, CardTheme, CardThemeId, QrMode } from '../types';
 import { CARD_THEMES } from '../data/themes';
@@ -310,6 +311,46 @@ export function CardEditor({
               />
               <span className="text-[10px] text-neutral-400">
                 El perfil de tu proyecto o marca gastronómica Guateque Manduca.
+              </span>
+            </div>
+
+            {/* Menú Digital / Carta & Viandas */}
+            <div className="space-y-2 p-3 rounded-xl bg-amber-950/20 border border-amber-500/40">
+              <div className="flex items-center justify-between">
+                <label htmlFor="input-menu-url" className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                  <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Menú Digital • Catering y Viandas al vacío</span>
+                </label>
+                {profile.menuUrl && (
+                  <a
+                    href={profile.menuUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-amber-400 hover:text-amber-300 font-medium flex items-center gap-1 transition-colors"
+                  >
+                    <span>Probar</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+              <input
+                id="input-menu-url"
+                type="text"
+                value={profile.menuUrl || ''}
+                onChange={(e) => updateField('menuUrl', e.target.value)}
+                placeholder="https://... (enlace a tu carta web, Drive, PDF o catálogo)"
+                className="w-full px-3 py-2 text-xs bg-neutral-950 border border-neutral-700 rounded-xl text-stone-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500 font-mono"
+              />
+              <input
+                id="input-menu-title"
+                type="text"
+                value={profile.menuTitle || ''}
+                onChange={(e) => updateField('menuTitle', e.target.value)}
+                placeholder="Menú digital - Catering y Viandas al vacío"
+                className="w-full px-3 py-2 text-xs bg-neutral-950 border border-neutral-700 rounded-xl text-stone-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500"
+              />
+              <span className="text-[10px] text-stone-400 block">
+                Al hacer clic en este botón de tu V-Card, redirige directamente a la carta de viandas y catering.
               </span>
             </div>
 
