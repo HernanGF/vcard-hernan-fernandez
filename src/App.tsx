@@ -40,6 +40,7 @@ import {
   getCleanAppUrl,
   generateWhatsAppShareMessage,
   AI_STUDIO_SHARED_URL,
+  VERCEL_PRODUCTION_URL,
   parseProfileFromUrl 
 } from './utils/vcard';
 import { downloadFramedQr } from './utils/qrDownload';
@@ -122,7 +123,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    return 'current';
+    return 'vercel';
   });
 
   const [customVercelUrl, setCustomVercelUrl] = useState<string>(() => {
@@ -132,7 +133,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    return '';
+    return VERCEL_PRODUCTION_URL;
   });
 
   // QR content target: 'web' (open online vCard profile) or 'vcf' (direct phone contact import without web)
