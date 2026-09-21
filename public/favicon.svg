@@ -1,47 +1,49 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
   <defs>
-    <!-- True Royal Blue Background Gradient -->
-    <radialGradient id="canvasBg" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" stop-color="#1e40af"/>
-      <stop offset="60%" stop-color="#1d4ed8"/>
-      <stop offset="100%" stop-color="#1e3a8a"/>
+    <!-- Boca Juniors Deep Dark Navy Blue Gradient (#0a2458 -> #041738 -> #020d22) -->
+    <radialGradient id="bocaNavyBg" cx="50%" cy="50%" r="72%">
+      <stop offset="0%" stop-color="#0c2963"/>
+      <stop offset="50%" stop-color="#071b42"/>
+      <stop offset="85%" stop-color="#030e24"/>
+      <stop offset="100%" stop-color="#020817"/>
     </radialGradient>
     
-    <radialGradient id="discBg" cx="50%" cy="50%" r="65%">
-      <stop offset="0%" stop-color="#2563eb"/>
-      <stop offset="50%" stop-color="#1d4ed8"/>
-      <stop offset="100%" stop-color="#172554"/>
+    <radialGradient id="bocaDiscBg" cx="50%" cy="50%" r="68%">
+      <stop offset="0%" stop-color="#0e3175"/>
+      <stop offset="45%" stop-color="#081e4a"/>
+      <stop offset="85%" stop-color="#04122d"/>
+      <stop offset="100%" stop-color="#020a1c"/>
     </radialGradient>
 
-    <!-- Bright Yellow-Gold Metallic Gradient -->
-    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="18%" stop-color="#fef08a"/>
-      <stop offset="55%" stop-color="#facc15"/>
-      <stop offset="85%" stop-color="#eab308"/>
-      <stop offset="100%" stop-color="#ca8a04"/>
+    <!-- Boca Juniors Bright Yellow-Gold Gradient (El Oro Xeneize) -->
+    <linearGradient id="bocaGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff885"/>
+      <stop offset="20%" stop-color="#ffd500"/>
+      <stop offset="60%" stop-color="#ffbe00"/>
+      <stop offset="90%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
 
     <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef9c3"/>
-      <stop offset="45%" stop-color="#facc15"/>
-      <stop offset="100%" stop-color="#ca8a04"/>
+      <stop offset="0%" stop-color="#fff59d"/>
+      <stop offset="45%" stop-color="#ffd500"/>
+      <stop offset="100%" stop-color="#eab308"/>
     </linearGradient>
   </defs>
 
-  <!-- Solid rich royal blue background for entire square -->
-  <rect width="600" height="600" fill="url(#canvasBg)"/>
+  <!-- Solid Boca Juniors Dark Navy Blue canvas -->
+  <rect width="600" height="600" fill="url(#bocaNavyBg)"/>
 
-  <!-- Outer Circular Disc with deep royal blue fill and golden border -->
-  <circle cx="300" cy="300" r="236" fill="url(#discBg)" stroke="url(#ringGold)" stroke-width="7" />
+  <!-- Outer Circular Disc with deep dark navy blue fill and pure yellow-gold border -->
+  <circle cx="300" cy="300" r="236" fill="url(#bocaDiscBg)" stroke="url(#ringGold)" stroke-width="8" />
   <circle cx="300" cy="300" r="214" fill="none" stroke="url(#ringGold)" stroke-width="3" stroke-dasharray="8 8" opacity="0.95"/>
   
-  <!-- Central Monogram HF with serif luxury contrast in bright yellow-gold -->
+  <!-- Central Monogram HF with serif luxury typography in pure Boca yellow-gold -->
   <text 
     x="300" 
     y="360" 
-    fill="url(#goldLinear)" 
+    fill="url(#bocaGold)" 
     font-family="Georgia, 'Times New Roman', serif" 
     font-size="185" 
     font-weight="bold" 
@@ -49,7 +51,7 @@
     text-anchor="middle"
   >HF</text>
 
-  <!-- Culinary Stars / Gastronomic Accents in bright yellow-gold -->
-  <circle cx="300" cy="148" r="7" fill="#facc15"/>
-  <circle cx="300" cy="452" r="7" fill="#facc15"/>
+  <!-- Boca Gold Stars / Culinary Accents in bright yellow-gold -->
+  <circle cx="300" cy="148" r="7.5" fill="#ffd500"/>
+  <circle cx="300" cy="452" r="7.5" fill="#ffd500"/>
 </svg>
